@@ -14,6 +14,7 @@ import reactor.test.StepVerifier;
 import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 /**
@@ -43,7 +44,7 @@ class CreateSimulationHandlerTest {
         DistributorSimulationDTO responseDTO = new DistributorSimulationDTO(
                 simulationId, null, null, null, null);
 
-        when(distributorSimulationsApi.createDistributorSimulation(eq(distributorId), eq(command), eq(null)))
+        when(distributorSimulationsApi.createDistributorSimulation(eq(distributorId), eq(command), anyString()))
                 .thenReturn(Mono.just(responseDTO));
 
         StepVerifier.create(handler.doHandle(command))
@@ -60,7 +61,7 @@ class CreateSimulationHandlerTest {
 
         RuntimeException exception = new RuntimeException("API failure");
 
-        when(distributorSimulationsApi.createDistributorSimulation(eq(distributorId), eq(command), eq(null)))
+        when(distributorSimulationsApi.createDistributorSimulation(eq(distributorId), eq(command), anyString()))
                 .thenReturn(Mono.error(exception));
 
         StepVerifier.create(handler.doHandle(command))

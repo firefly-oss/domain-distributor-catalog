@@ -1,5 +1,8 @@
 package com.firefly.domain.distributor.catalog.core.distributor.handlers;
 
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+
 import com.firefly.core.distributor.sdk.api.DistributorSimulationsApi;
 import com.firefly.core.distributor.sdk.model.DistributorSimulationDTO;
 import com.firefly.domain.distributor.catalog.core.distributor.queries.GetSimulationQuery;
@@ -44,7 +47,7 @@ class GetSimulationHandlerTest {
         DistributorSimulationDTO responseDTO = new DistributorSimulationDTO(
                 simulationId, null, null, null, null);
 
-        when(distributorSimulationsApi.getDistributorSimulationById(distributorId, simulationId, null))
+        when(distributorSimulationsApi.getDistributorSimulationById(eq(distributorId), eq(simulationId), anyString()))
                 .thenReturn(Mono.just(responseDTO));
 
         StepVerifier.create(handler.doHandle(query))
@@ -64,7 +67,7 @@ class GetSimulationHandlerTest {
 
         RuntimeException exception = new RuntimeException("API failure");
 
-        when(distributorSimulationsApi.getDistributorSimulationById(distributorId, simulationId, null))
+        when(distributorSimulationsApi.getDistributorSimulationById(eq(distributorId), eq(simulationId), anyString()))
                 .thenReturn(Mono.error(exception));
 
         StepVerifier.create(handler.doHandle(query))
