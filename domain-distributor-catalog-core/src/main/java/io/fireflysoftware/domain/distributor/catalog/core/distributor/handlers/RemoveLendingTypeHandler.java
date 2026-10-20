@@ -1,0 +1,23 @@
+package io.fireflysoftware.domain.distributor.catalog.core.distributor.handlers;
+
+import org.fireflyframework.cqrs.annotations.CommandHandlerComponent;
+import org.fireflyframework.cqrs.command.CommandHandler;
+import io.fireflysoftware.core.distributor.sdk.api.LendingTypeApi;
+import io.fireflysoftware.domain.distributor.catalog.core.distributor.commands.RemoveLendingTypeCommand;
+import reactor.core.publisher.Mono;
+import java.util.UUID;
+
+@CommandHandlerComponent
+public class RemoveLendingTypeHandler extends CommandHandler<RemoveLendingTypeCommand, Void> {
+
+    private final LendingTypeApi lendingTypeApi;
+
+    public RemoveLendingTypeHandler(LendingTypeApi lendingTypeApi) {
+        this.lendingTypeApi = lendingTypeApi;
+    }
+
+    @Override
+    protected Mono<Void> doHandle(RemoveLendingTypeCommand cmd) {
+        return lendingTypeApi.deleteLendingType(cmd.lendingTypeId(), UUID.randomUUID().toString());
+    }
+}

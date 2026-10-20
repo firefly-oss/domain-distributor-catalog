@@ -30,7 +30,7 @@ Developed by the Firefly Software Foundation. [dev@fireflysoftware.io](mailto:de
 
 `domain-distributor-catalog` is a Spring WebFlux microservice that acts as the domain orchestration layer for distributor product catalogs within the Firefly platform. It sits between client-facing API consumers and the core `core-common-distributor-mgmt` platform service, translating inbound HTTP requests into coordinated multi-step saga workflows that atomically create or mutate catalog entities — product categories, products, lending types, lending configurations, leasing contracts, and shipments — across a distributed system boundary.
 
-The service owns no persistent storage of its own. Every read and write operation is delegated to the upstream `core-common-distributor-mgmt` service through a generated SDK client (`com.firefly.core.distributor.sdk`). State that must flow between saga steps is held transiently in an `ExecutionContext` scoped to a single saga execution. This design keeps the domain layer stateless and horizontally scalable while preserving strong transactional guarantees through compensating rollback actions registered on each saga step.
+The service owns no persistent storage of its own. Every read and write operation is delegated to the upstream `core-common-distributor-mgmt` service through a generated SDK client (`io.fireflysoftware.core.distributor.sdk`). State that must flow between saga steps is held transiently in an `ExecutionContext` scoped to a single saga execution. This design keeps the domain layer stateless and horizontally scalable while preserving strong transactional guarantees through compensating rollback actions registered on each saga step.
 
 Domain operations are modelled using the Firefly Framework CQRS and saga-orchestration primitives provided by `fireflyframework-starter-domain`. Commands flow through the `CommandBus` and are dispatched to typed `@CommandHandlerComponent` classes; queries flow through the `QueryBus` and are dispatched to `@QueryHandlerComponent` classes. Complex write workflows — product registration, product revision, product retirement, and standalone shipment registration — are expressed as `@Saga` classes composed of `@SagaStep` methods, which guarantees automatic compensating rollback when any step in the chain fails.
 
@@ -272,7 +272,7 @@ All properties are defined in `domain-distributor-catalog-web/src/main/resources
 |----------|---------|-------------|
 | `springdoc.api-docs.path` | `/v3/api-docs` | Path for the OpenAPI JSON specification |
 | `springdoc.swagger-ui.path` | `/swagger-ui.html` | Path for the Swagger UI |
-| `springdoc.packages-to-scan` | `com.firefly.domain.distributor.catalog.web.controller` | Controller packages included in spec generation |
+| `springdoc.packages-to-scan` | `io.fireflysoftware.domain.distributor.catalog.web.controller` | Controller packages included in spec generation |
 | `springdoc.paths-to-match` | `/api/**` | Path filter applied during spec generation |
 
 ### Logging Profiles
@@ -280,9 +280,9 @@ All properties are defined in `domain-distributor-catalog-web/src/main/resources
 | Profile | Log Levels | OpenAPI UI |
 |---------|-----------|-----------|
 | _(default)_ | Inherits parent defaults | Enabled |
-| `dev` | `root=INFO`, `com.firefly=DEBUG`, `org.springframework.r2dbc=DEBUG`, `org.flywaydb=DEBUG` | Enabled |
-| `testing` | `root=INFO`, `com.firefly=DEBUG`, `org.springframework.r2dbc=INFO` | Enabled |
-| `prod` | `root=WARN`, `com.firefly=INFO`, `org.springframework=WARN` | Disabled |
+| `dev` | `root=INFO`, `io.fireflysoftware=DEBUG`, `org.springframework.r2dbc=DEBUG`, `org.flywaydb=DEBUG` | Enabled |
+| `testing` | `root=INFO`, `io.fireflysoftware=DEBUG`, `org.springframework.r2dbc=INFO` | Enabled |
+| `prod` | `root=WARN`, `io.fireflysoftware=INFO`, `org.springframework=WARN` | Disabled |
 
 ## Running Locally
 

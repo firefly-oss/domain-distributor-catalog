@@ -1,0 +1,27 @@
+package io.fireflysoftware.domain.distributor.catalog.core.distributor.handlers;
+
+import org.fireflyframework.cqrs.annotations.CommandHandlerComponent;
+import org.fireflyframework.cqrs.command.CommandHandler;
+import io.fireflysoftware.core.distributor.sdk.api.LendingConfigurationApi;
+import io.fireflysoftware.domain.distributor.catalog.core.distributor.commands.RegisterLendingConfigurationCommand;
+import reactor.core.publisher.Mono;
+
+import java.util.Objects;
+import java.util.UUID;
+
+@CommandHandlerComponent
+public class RegisterLendingConfigurationHandler extends CommandHandler<RegisterLendingConfigurationCommand, UUID> {
+
+    private final LendingConfigurationApi lendingConfigurationApi;
+
+    public RegisterLendingConfigurationHandler(LendingConfigurationApi lendingConfigurationApi) {
+        this.lendingConfigurationApi = lendingConfigurationApi;
+    }
+
+    @Override
+    protected Mono<UUID> doHandle(RegisterLendingConfigurationCommand cmd) {
+        return lendingConfigurationApi.createLendingConfiguration(UUID.randomUUID(), cmd.getProductId(), cmd, UUID.randomUUID().toString())
+                .mapNotNull(lendingConfigurationDTO ->
+                        Objects.requireNonNull(Objects.requireNonNull(lendingConfigurationDTO)).getId());
+    }
+}

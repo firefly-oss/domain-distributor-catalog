@@ -1,0 +1,60 @@
+package io.fireflysoftware.domain.distributor.catalog.infra;
+
+import io.fireflysoftware.core.distributor.sdk.api.*;
+import io.fireflysoftware.core.distributor.sdk.invoker.ApiClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
+/**
+ * Default implementation of the ClientFactory interface.
+ * Creates client service instances using the appropriate API clients and dependencies.
+ */
+@Component
+public class ClientFactory {
+
+    private final ApiClient apiClient;
+
+    @Autowired
+    public ClientFactory(
+            DistributorCatalogProperties distributorCatalogProperties) {
+        this.apiClient = new ApiClient();
+        this.apiClient.setBasePath(distributorCatalogProperties.getBasePath());
+    }
+
+    @Bean
+    public ProductApi productApi() {
+        return new ProductApi(apiClient);
+    }
+
+    @Bean
+    public ProductCategoryApi productCategoryApi() {
+        return new ProductCategoryApi(apiClient);
+    }
+
+    @Bean
+    public LendingTypeApi lendingTypeApi() {
+        return new LendingTypeApi(apiClient);
+    }
+
+    @Bean
+    public LendingConfigurationApi lendingConfigurationApi() {
+        return new LendingConfigurationApi(apiClient);
+    }
+
+    @Bean
+    public LendingContractApi lendingContractApi() {
+        return new LendingContractApi(apiClient);
+    }
+
+    @Bean
+    public ShipmentApi shipmentApi() {
+        return new ShipmentApi(apiClient);
+    }
+
+    @Bean
+    public DistributorSimulationsApi distributorSimulationsApi() {
+        return new DistributorSimulationsApi(apiClient);
+    }
+
+}

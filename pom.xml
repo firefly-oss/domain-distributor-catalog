@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.firefly</groupId>
+        <groupId>io.fireflysoftware</groupId>
         <artifactId>firefly-parent</artifactId>
-        <version>26.10.2</version>
+        <version>26.10.3</version>
         <relativePath/>
     </parent>
 
     <artifactId>domain-distributor-catalog</artifactId>
-    <version>26.10.2</version>
+    <version>26.10.3</version>
     <packaging>pom</packaging>
     <modules>
         <module>domain-distributor-catalog-core</module>
@@ -34,27 +34,27 @@
             <!-- Firefly Framework BOM -->
             <!-- Internal modules -->
             <dependency>
-                <groupId>com.firefly</groupId>
+                <groupId>io.fireflysoftware</groupId>
                 <artifactId>domain-distributor-catalog-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.firefly</groupId>
+                <groupId>io.fireflysoftware</groupId>
                 <artifactId>domain-distributor-catalog-interfaces</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.firefly</groupId>
+                <groupId>io.fireflysoftware</groupId>
                 <artifactId>domain-distributor-catalog-web</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.firefly</groupId>
+                <groupId>io.fireflysoftware</groupId>
                 <artifactId>domain-distributor-catalog-sdk</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.firefly</groupId>
+                <groupId>io.fireflysoftware</groupId>
                 <artifactId>domain-distributor-catalog-infra</artifactId>
                 <version>${project.version}</version>
             </dependency>
