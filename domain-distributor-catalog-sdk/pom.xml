@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>domain-distributor-catalog-sdk</artifactId>
+    <name>domain-distributor-catalog-sdk</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

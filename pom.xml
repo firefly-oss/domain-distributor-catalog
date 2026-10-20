@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>domain-distributor-catalog</artifactId>
+    <name>domain-distributor-catalog</name>
     <version>26.10.3</version>
     <packaging>pom</packaging>
     <modules>

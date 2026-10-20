@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>domain-distributor-catalog-interfaces</artifactId>
+    <name>domain-distributor-catalog-interfaces</name>
 
     <properties>
         <maven.compiler.source>25</maven.compiler.source>
